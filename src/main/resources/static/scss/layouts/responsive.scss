@@ -1,0 +1,55 @@
+@media screen and (max-width: 1024px) {
+    .container {
+        width: calc( 100% - 30px);
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .signup-img {
+        display: none;
+    }
+    .signup-form {
+        width: 100%;
+    }
+    .register-form {
+        padding: 93px 80px 90px 80px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+
+    .signup-content {
+        width: 100%;
+    }
+    .form-radio-item {
+        margin-right: 15px;
+    }
+    .register-form {
+        padding: 93px 30px 90px 30px;
+    }
+}
+
+@media screen and (max-width: 768px)  {
+    .form-row {
+        @include flex-direction(column);
+        margin: 0px;
+    }
+    .form-row .form-group {
+        width: 100%;
+        padding: 0 0px;
+    }
+}
+
+
+//end 480px
+@media screen and (max-width: 480px) {
+    .submit {
+        width: 100%;
+    }
+    #submit {
+        margin-bottom: 20px;
+        margin-right: 0px;
+    }
+    .form-radio-group {
+        @include flex-direction(column);
+    }
+}

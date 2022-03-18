@@ -1,0 +1,72 @@
+body {
+    background-image: url(../images/register.jpeg);
+    color: #fff;
+    background-size: auto auto;
+}
+
+#maindiv {
+	background: #1a181860;
+	text-align: center;
+	border-radius: 10px;
+    width: 800px;
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -225px 0 0 -400px;
+}
+
+#maindiv h1 {
+    padding-top: 40px;;
+}
+
+#username, #userpassword {
+    padding-top: 10px;
+}
+
+#useremail {
+    padding-top: 10px;
+}
+
+#username input {
+    border: 0;
+	width: 50%;
+	font-size: 15px;
+	color: #fff;
+	background: #dac4c490;
+	border-bottom: 2px solid #aef30d;
+	padding: 5px 10px;
+	margin-top: 10px;
+}
+
+.userpassword input {
+    border: 0;
+	width: 50%;
+	font-size: 15px;
+	color: #fff;
+	background: #ec929290;
+	border-bottom: 2px solid #aef30d;
+	padding: 5px 10px;
+	margin-top: 10px;
+}
+
+#button input {
+    width: 150px;
+    height: 30px;
+    margin: 20px;
+    border: 2px;
+    border-radius: 20px;
+    padding-left: 10px;
+}
+
+#useremail select {
+    border: 0;
+	width: 50%;
+	font-size: 15px;
+	color: #fff;
+	background: #f1282890;
+	border-bottom: 2px solid #aef30d;
+	padding: 5px 10px;
+	margin-top: 10px;
+    margin-bottom: 20px;;
+}
