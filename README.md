@@ -15,7 +15,7 @@
 Ubuntu 20.04LTS + Java (OpenJDK 8) + IDEA Ultimate 2021.3.3 + Hadoop 3.3.2
 
 ## 项目下载
-Gitee仓库：[https://gitee.com/gennwolf/yunpan-hadoop](https://gitee.com/gennwolf/yunpan-hadoop)
+Github仓库：[https://github.com/gennwolf/yunpan-hadoop](https://github.com/gennwolf/yunpan-hadoop)
 
 ## 使用框架以及Web服务器
 Maven + SpringBoot 2.6.4 + SpringMVC + Apache Tomcat 9.0.58
