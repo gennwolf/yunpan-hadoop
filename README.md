@@ -1,3 +1,6 @@
+### 20231219
+更新了相关的Maven依赖
+
 # 【Hadoop/Java】基于HDFS的Java Web网络云盘
 ## [https://blog.csdn.net/weixin_53395564/article/details/123575761](https://blog.csdn.net/weixin_53395564/article/details/123575761)
 
@@ -12,13 +15,13 @@
 ![云盘系统基本功能图](https://img-blog.csdnimg.cn/6deb76f475bd4885a0dd3017f8cac5ce.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV29sZi5HZW5u,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
 
 ## 环境
-Ubuntu 20.04LTS + Java (OpenJDK 8) + IDEA Ultimate 2021.3.3 + Hadoop 3.3.2
+Ubuntu 22.04LTS + Java (OpenJDK 11) + IDEA Ultimate 2023.3.1 + Hadoop 3.3.6
 
 ## 项目下载
 Github仓库：[https://github.com/gennwolf/yunpan-hadoop](https://github.com/gennwolf/yunpan-hadoop)
 
 ## 使用框架以及Web服务器
-Maven + SpringBoot 2.6.4 + SpringMVC + Apache Tomcat 9.0.58
+Maven + SpringBoot 2.7.18 + SpringMVC + Apache Tomcat 9.0.83
 前端模板来源：[https://colorlib.com](https://colorlib.com) (使用了Bootstrap + jQuery)
 
 ## 分布式集群配置
@@ -53,7 +56,7 @@ Maven + SpringBoot 2.6.4 + SpringMVC + Apache Tomcat 9.0.58
 	<dependency>
 	    <groupId>org.apache.hadoop</groupId>
 	    <artifactId>hadoop-client</artifactId>
-	    <version>3.3.2</version>
+	    <version>3.3.6</version>
 	</dependency>
 ```
 
@@ -449,12 +452,12 @@ public class HDFSFile {
 	<dependency>
 		<groupId>commons-fileupload</groupId>
 		<artifactId>commons-fileupload</artifactId>
-		<version>1.4</version>
+		<version>1.5</version>
 	</dependency>
 	<dependency>
 		<groupId>commons-io</groupId>
 		<artifactId>commons-io</artifactId>
-		<version>2.11.0</version>
+		<version>2.15.1</version>
 	</dependency>
 ```
 
