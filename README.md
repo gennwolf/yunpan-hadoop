@@ -1,5 +1,5 @@
 ### 20231219
-更新了相关的Maven依赖，更新JDK版本为11，更新Hadoop版本为3.3.6
+更新了相关的Maven依赖，更新JDK版本为11，更新Hadoop版本为3.3.6，更新SpringBoot版本为2.7.18
 
 # 【Hadoop/Java】基于HDFS的Java Web网络云盘
 ## [https://blog.csdn.net/weixin_53395564/article/details/123575761](https://blog.csdn.net/weixin_53395564/article/details/123575761)
