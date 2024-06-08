@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
-    <title>文件列表</title>
+    <title>File List</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -24,7 +24,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5">
-                <h2 class="heading-section">我的云盘</h2>
+                <h2 class="heading-section">My Cloud Drive</h2>
             </div>
         </div>
         <div>
@@ -34,7 +34,7 @@
             <div class="fileupload">
                 <form method="post" action="<%=request.getContextPath()%>/upload" enctype="multipart/form-data" onsubmit="clickuploadbtn()">
                     <input type="file" name="file" class="selectfilebtn" required>
-                    <input type="submit" value="上传" class="uploadbtn" >
+                    <input type="submit" value="Upload" class="uploadbtn" >
                 </form>
                 <p id="status"></p>
             </div>
@@ -44,15 +44,15 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>当前路径：${currentpath}</th>
-                            <th>创建时间</th>
-                            <th>类型</th>
+                            <th>Currnet Path: ${currentpath}</th>
+                            <th>Create Time</th>
+                            <th>Type</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <th scope="row"><a href="<%=request.getContextPath()%>/back">返回上层目录(..)</a></th>
+                            <th scope="row"><a href="<%=request.getContextPath()%>/back">Upper Directory(..)</a></th>
                             <td></td><td></td><td></td>
                         </tr>
                         <c:forEach var="file" items="${filelist}">
@@ -60,7 +60,7 @@
                                 <th scope="row"><a href="<%=request.getContextPath()%>/fileHandle?filename=${file.name}&type=${file.type}">${file.name}</a></th>
                                 <td>${file.date}</td>
                                 <td>${file.type}</td>
-                                <td><a href="<%=request.getContextPath()%>/deleteFile?filename=${file.name}">删除</a></td>
+                                <td><a href="<%=request.getContextPath()%>/deleteFile?filename=${file.name}">Delete</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -68,26 +68,26 @@
                 </div>
             </div>
             <div class="useract">
-                <button id="mkdirbtn" onclick="enablemkdir()">创建目录</button>
-                <button id="logoutbtn" onclick="window.location.href='<%=request.getContextPath()%>/logout'">退出登录</button>
-                <a id="deleteuser" href="<%=request.getContextPath()%>/deleteUser" onclick="deleteUserCheck()">注销账户</a>
+                <button id="mkdirbtn" onclick="enablemkdir()">Create Directory</button>
+                <button id="logoutbtn" onclick="window.location.href='<%=request.getContextPath()%>/logout'">Logout</button>
+                <a id="deleteuser" href="<%=request.getContextPath()%>/deleteUser" onclick="deleteUserCheck()">Delete Account</a>
             </div>
         </div>
     </div>
 </section>
 <script>
     function clickuploadbtn() {
-        document.getElementById("status").innerHTML = "文件上传中，请勿刷新或关闭页面！";
+        document.getElementById("status").innerHTML = "FILE UPLOADING! Please do not refresh or close the page!";
     }
     function deleteUserCheck() {
-        return confirm("确定注销账户？当前账户的所有数据将会丢失！");
+        return confirm("ALL DATA of the current account will be LOST!");
     }
     function enablemkdir() {
-        var dirname = prompt("请输入要创建的目录名：");
+        var dirname = prompt("Please enter the directory name: ");
         if(dirname != '' && dirname != null)
             window.location.href = "<%=request.getContextPath()%>/makeDirectory?dirname=" + dirname;
         else
-            alert("目录名不能为空！");
+            alert("The directory name cannot be EMPTY!");
     }
 </script>
 <script src="js/jquery.min.js"></script>

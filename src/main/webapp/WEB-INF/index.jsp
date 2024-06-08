@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>登录</title>
+    <title>LOGIN</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -34,10 +34,10 @@
 
             <form class="login100-form validate-form" method="post" action="<%=request.getContextPath()%>/login">
 					<span class="login100-form-title">
-						用户登录
+						User Login
 					</span>
 
-                <div class="wrap-input100 validate-input" data-validate = "用户名不能为空">
+                <div class="wrap-input100 validate-input" data-validate = "Username cannot be EMPTY!">
                     <input class="input100" type="text" name="username" placeholder="Username">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
@@ -45,7 +45,7 @@
 						</span>
                 </div>
 
-                <div class="wrap-input100 validate-input" data-validate = "密码不能为空">
+                <div class="wrap-input100 validate-input" data-validate = "Password cannot be EMPTY!">
                     <input class="input100" type="password" name="userpasswd" placeholder="Password">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="container-login100-form-btn">
-                    <input type="submit" class="login100-form-btn" value="登录">
+                    <input type="submit" class="login100-form-btn" value="Login">
                 </div>
 
                 <div class="text-center p-t-12">
@@ -65,7 +65,7 @@
 
                 <div class="text-center p-t-136">
                     <a class="txt2" href="<%=request.getContextPath()%>/jumpToRegisterPage">
-                        没有账号？点击此处注册
+                        No account？Click here!
                         <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                     </a>
                 </div>

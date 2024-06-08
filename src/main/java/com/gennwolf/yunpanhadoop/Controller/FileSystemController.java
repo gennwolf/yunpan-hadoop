@@ -26,7 +26,7 @@ public class FileSystemController {
     //实例化Configuration和FileSystem
     public FileSystem getFileSystem() throws IOException {
         Configuration conf = new Configuration();
-        conf.set("fs.defaultFS", "hdfs://192.168.170.111:9000");
+        conf.set("fs.defaultFS", "hdfs://192.168.170.111:8020");
         return FileSystem.get(conf);
     }
 
@@ -36,7 +36,7 @@ public class FileSystemController {
         String username = request.getParameter("username");
         String userpasswd = request.getParameter("userpasswd");
         if(!loginCheck(username, userpasswd)) {
-            model.addAttribute("status", "用户名或密码错误！");
+            model.addAttribute("status", "Wrong username or password!");
             return "index";
         }
         session.setAttribute("LOGIN_STATUS", username);
@@ -61,16 +61,16 @@ public class FileSystemController {
         String userpasswd = request.getParameter("userpasswd");
         String userpasswd_confirm = request.getParameter("userpasswd_confirm");
         if(!userpasswd.equals(userpasswd_confirm)) {
-            model.addAttribute("status", "两次密码输入不一致！");
+            model.addAttribute("status", "Two passwords are not the same!");
             return "register";
         }
         if(userExistCheck(username)) {
-            model.addAttribute("status", "用户已存在！");
+            model.addAttribute("status", "User already exists!");
             return "register";
         }
         insertUserInfoToFile(username, userpasswd);
         mkdir("/" + username);
-        model.addAttribute("status", "注册成功，请登录！");
+        model.addAttribute("status", "Register successfully!");
         return "index";
     }
 
@@ -79,10 +79,10 @@ public class FileSystemController {
     public String makeDirectory(HttpSession session, HttpServletRequest request, Model model) throws IOException {
         String dirname = request.getParameter("dirname");
         if(fileExist(session.getAttribute("path").toString() + "/" + dirname))
-            model.addAttribute("warning", "alert(\"该目录已存在，请重新输入目录名！\");");
+            model.addAttribute("warning", "alert(\"The directory already exists!\");");
         else {
             mkdir(session.getAttribute("path").toString() + "/" + dirname);
-            model.addAttribute("warning", "alert(\"创建成功！\");");
+            model.addAttribute("warning", "alert(\"Created successfully!\");");
         }
         model.addAttribute("currentpath", session.getAttribute("path").toString());
         model.addAttribute("filelist", getFileList(session.getAttribute("path").toString()));
@@ -93,12 +93,12 @@ public class FileSystemController {
     @RequestMapping("/deleteFile")
     public String deleteFile(HttpSession session, HttpServletRequest request, Model model) throws IOException {
         if(!loginStatusCheck(session)) {
-            model.addAttribute("status", "此操作需要你登录！");
+            model.addAttribute("status", "This action requires you to login!");
             return "index";
         }
         String filename = request.getParameter("filename");
         delete(session.getAttribute("path").toString() + "/" + filename);
-        model.addAttribute("warning", "alert(\"删除成功！\");");
+        model.addAttribute("warning", "alert(\"Deleted successfully!\");");
         model.addAttribute("currentpath", session.getAttribute("path").toString());
         model.addAttribute("filelist", getFileList(session.getAttribute("path").toString()));
         return "myfiles";
@@ -110,7 +110,7 @@ public class FileSystemController {
         String username = session.getAttribute("path").toString().split("/")[1];
         delete("/" + username);
         removeUserFromFile(username);
-        model.addAttribute("warning", "alert(\"注销成功！\");");
+        model.addAttribute("warning", "alert(\"Deregistration successfully!\");");
         session.removeAttribute("path");
         session.removeAttribute("LOGIN_STATUS");
         return "index";
@@ -120,13 +120,13 @@ public class FileSystemController {
     @RequestMapping("/back")
     public String back(HttpSession session, HttpServletRequest request, Model model) throws IOException {
         if(!loginStatusCheck(session)) {
-            model.addAttribute("status", "此操作需要你登录！");
+            model.addAttribute("status", "This action requires you to login!");
             return "index";
         }
         String currentpath = session.getAttribute("path").toString();
         String[] pathsplit = currentpath.split("/");
         if(pathsplit.length == 2) {
-            model.addAttribute("warning", "alert(\"当前已经是根目录！\");");
+            model.addAttribute("warning", "alert(\"Currently in the root directory!\");");
             model.addAttribute("currentpath", session.getAttribute("path").toString());
             model.addAttribute("filelist", getFileList(session.getAttribute("path").toString()));
             return "myfiles";
@@ -144,12 +144,12 @@ public class FileSystemController {
     @RequestMapping("/fileHandle")
     public String fileHandle(HttpSession session, HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {
         if(!loginStatusCheck(session)) {
-            model.addAttribute("status", "此操作需要你登录！");
+            model.addAttribute("status", "This action requires you to login!");
             return "index";
         }
         String filename = request.getParameter("filename");
         String filetype = request.getParameter("type");
-        if(filetype.equals("目录")) {
+        if(filetype.equals("Directory")) {
             session.setAttribute("path", session.getAttribute("path").toString() + "/" + filename);
             model.addAttribute("currentpath", session.getAttribute("path").toString());
             model.addAttribute("filelist", getFileList(session.getAttribute("path").toString()));
@@ -202,9 +202,9 @@ public class FileSystemController {
         model.addAttribute("currentpath", session.getAttribute("path").toString());
         model.addAttribute("filelist", getFileList(session.getAttribute("path").toString()));
         if(isExist)
-            model.addAttribute("warning", "alert(\"网盘有同名文件，建议更改文件名！\");");
+            model.addAttribute("warning", "alert(\"There are files with the same name!\");");
         else
-            model.addAttribute("warning", "alert(\"文件上传成功！\");");
+            model.addAttribute("warning", "alert(\"Uploaded Successfully!\");");
         fs.close();
         return "myfiles";
     }
@@ -244,9 +244,9 @@ public class FileSystemController {
             file.setName(fileStatus.getPath().getName());
             file.setDate(format.format(fileStatus.getModificationTime()));
             if(fileStatus.isDirectory())
-                file.setType("目录");
+                file.setType("Directory");
             else
-                file.setType("文件");
+                file.setType("File");
             fileList.add(file);
         }
         //排序，目录放前面，文件放后面

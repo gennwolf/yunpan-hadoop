@@ -1,10 +1,17 @@
+### 20240609
+更新了相关的Maven依赖，网页端口改为8090，系统版本更新为Ubuntu 24.04LTS，IDEA版本变为2024.1.1，Hadoop版本更新为3.4.0，同时集群配置为HDFS HA和YARN HA集群
 ### 20231219
 更新了相关的Maven依赖，更新JDK版本为11，更新Hadoop版本为3.3.6，更新SpringBoot版本为2.7.18
 
 # 【Hadoop/Java】基于HDFS的Java Web网络云盘
 ## [https://blog.csdn.net/weixin_53395564/article/details/123575761](https://blog.csdn.net/weixin_53395564/article/details/123575761)
 
-本人BNUZ大学生萌新，水平不足，还请各位多多指教！
+本人~~BNUZ大学生萌新~~ MPU萌新，水平不足，还请各位多多指教！
+
+（202405：该项目环境部署迁移到Docker，并已被用于MPU云计算课程大作业）
+
+
+住：由于稍微更新过代码和环境，本页面的图片可能有一些老旧，本页面的代码可能和仓库里的源码有点不一样，不过应该不影响，具体代码以仓库为准。
 
 ## 实验目的
 1.  熟悉HDFS Java API的使用；
@@ -15,34 +22,27 @@
 ![云盘系统基本功能图](https://img-blog.csdnimg.cn/6deb76f475bd4885a0dd3017f8cac5ce.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV29sZi5HZW5u,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
 
 ## 环境
-Ubuntu 22.04LTS + Java (OpenJDK 11) + IDEA Ultimate 2023.3.1 + Hadoop 3.3.6
+Ubuntu 24.04LTS + Java (OpenJDK 11) + IDEA Ultimate 2024.1.1 + Hadoop 3.4.0
 
 ## 项目下载
-Github仓库：[https://github.com/gennwolf/yunpan-hadoop](https://github.com/gennwolf/yunpan-hadoop)
+（所有jsp页面语言变更为英语）Github仓库：[https://github.com/gennwolf/yunpan-hadoop](https://github.com/gennwolf/yunpan-hadoop)
 
 ## 使用框架以及Web服务器
 Maven + SpringBoot 2.7.18 + SpringMVC + Apache Tomcat 9.0.83
 前端模板来源：[https://colorlib.com](https://colorlib.com) (使用了Bootstrap + jQuery)
 
 ## 分布式集群配置
-有3个节点，每个节点的主机名、IP以及担任的角色如下表所示：
+有3个节点，每个节点的主机名、IP以及担任的角色如下表所示，集群为HDFS HA/YARN HA：
+
 |节点|主机名|IP|角色|
 |:---------:|:---------:|:---------:|:---------:|
-|1|Master|192.168.170.111|NameNode, SecondaryNameNode, DataNode, ResourceManager, NodeManager|
-|2|Slave1|192.168.170.112|DataNode, NodeManager|
-|3|Slave2|192.168.170.113|DataNode, NodeManager|
-
-|网关|子网掩码|
-|:---------:|:---------:|
-|192.168.170.2|255.255.255.0|
+|1|master|192.168.170.111|NameNode(Active), DataNode, ResourceManager, NodeManager, QuorumPeerMain, JournalNode, DFSZKFailoverController|
+|2|slave1|192.168.170.112|NameNode(Standby), DataNode, ResourceManager, NodeManager, QuorumPeerMain, JournalNode, DFSZKFailoverController|
+|3|slave2|192.168.170.113|DataNode, NodeManager, QuorumPeerMain, JournalNode|
 
 ##  实验步骤
 
-1. 启动Hadoop集群，分别到各个节点使用jps命令查看进程是否与上表匹配：
-![启动集群](https://img-blog.csdnimg.cn/6ec9c56271714e62a9f129172134730c.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV29sZi5HZW5u,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
-下图为Master节点的Java进程，和上表对应节点的角色相匹配：
-![查看Master节点的进程](https://img-blog.csdnimg.cn/5d2117539a0b4b0989252bdf82d1276f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAV29sZi5HZW5u,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
-可以在Master上用ssh连接到其他节点查看进程
+1. 启动集群，这里不详述集群的配置和启动
 
 2. 在HDFS的根目录下创建一个文件userinfo.dat用于保存用户信息，用户信息包含用户名和密码，用逗号分隔，该文件用于云盘的登录/注册等操作，我们往里面添加两个用户spring和summer，密码都为123456，如下图：
 ![查看userinfo.dat文件内容](https://img-blog.csdnimg.cn/a6524cc74ef442d697ca47cf42d12a72.png#pic_center)
@@ -56,7 +56,7 @@ Maven + SpringBoot 2.7.18 + SpringMVC + Apache Tomcat 9.0.83
 	<dependency>
 	    <groupId>org.apache.hadoop</groupId>
 	    <artifactId>hadoop-client</artifactId>
-	    <version>3.3.6</version>
+	    <version>3.4.0</version>
 	</dependency>
 ```
 
@@ -86,7 +86,7 @@ Maven + SpringBoot 2.7.18 + SpringMVC + Apache Tomcat 9.0.83
     //实例化Configuration和FileSystem
     public FileSystem getFileSystem() throws IOException {
         Configuration conf = new Configuration();
-        conf.set("fs.defaultFS", "hdfs://192.168.170.111:9000");
+        conf.set("fs.defaultFS", "hdfs://192.168.170.111:8020");
         return FileSystem.get(conf);
     }
 ```

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>注册</title>
+    <title>Register</title>
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- Font-->
@@ -18,21 +18,21 @@
             <img src="images/form-v6.png" alt="form">
         </div>
         <form class="form-detail" action="<%=request.getContextPath()%>/register" method="post">
-            <h2>用户注册</h2>
+            <h2>User Register</h2>
             <div class="form-row">
-                <input type="text" name="username" id="full-name" class="input-text" placeholder="用户名" required>
+                <input type="text" name="username" id="full-name" class="input-text" placeholder="Username" required>
             </div>
             <div class="form-row">
-                <input type="password" name="userpasswd" id="password" class="input-text" placeholder="密码" required>
+                <input type="password" name="userpasswd" id="password" class="input-text" placeholder="Password" required>
             </div>
             <div class="form-row">
-                <input type="password" name="userpasswd_confirm" id="comfirm-password" class="input-text" placeholder="确认密码" required>
+                <input type="password" name="userpasswd_confirm" id="comfirm-password" class="input-text" placeholder="Confirm Password" required>
             </div>
             <p style="color: black">
                 ${status}
             </p>
             <div class="form-row-last">
-                <input type="submit" name="register" class="register" value="注册">
+                <input type="submit" name="register" class="register" value="Submit">
             </div>
         </form>
     </div>
